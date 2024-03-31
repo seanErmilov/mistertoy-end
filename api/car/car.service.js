@@ -22,7 +22,8 @@ async function query(filterBy={txt:''}) {
 async function getById(carId) {
     try {
         const collection = await dbService.getCollection('car')
-        const car = collection.findOne({ _id: ObjectId(carId) })
+        const car = await collection.findOne({ _id: ObjectId(carId) })
+        car.createdAt = ObjectId(car._id).getTimestamp()
         return car
     } catch (err) {
         logger.error(`while finding car ${carId}`, err)

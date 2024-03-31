@@ -32,9 +32,17 @@ function _isError(e) {
 
 function _doLog(level, ...args) {
 
-    const strs = args.map(arg =>
-        (typeof arg === 'string' || _isError(arg)) ? arg : JSON.stringify(arg)
-    )
+    const strs = args.map(arg => {
+        if (typeof arg ===  'string') {
+        } else if (_isError(arg)) {
+        } else if (arg instanceof Promise) {
+            arg = 'Promise'
+        } else {
+            console.log('STRINGIFY', arg)
+            arg = JSON.stringify(arg)    
+        }
+        return arg
+    })   
 
     var line = strs.join(' | ')
     line = `${_getTime()} - ${level} - ${line} \n`
