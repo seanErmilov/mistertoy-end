@@ -11,15 +11,16 @@
     },
     "author": "Me",
     "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^20.14.10",
+        "nodemon": "^2.0.20"
+    },
     "dependencies": {
-        "bcrypt": "^5.0.0",
+        "bcrypt": "^5.1.1",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
-        "cryptr": "^6.0.3",
-        "express": "^4.17.1",
-        "mongodb": "^3.2.7"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.20"
+        "cryptr": "^6.3.0",
+        "express": "^4.19.2",
+        "mongodb": "^6.8.0"
     }
 }

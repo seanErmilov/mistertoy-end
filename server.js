@@ -23,9 +23,16 @@ if (process.env.NODE_ENV === 'production') {
     console.log('__dirname: ', __dirname)
 } else {
     // Configuring CORS
+    // Make sure origin contains the url 
+    // your frontend dev-server is running on
     const corsOptions = {
-        // Make sure origin contains the url your frontend is running on
-        origin: ['http://127.0.0.1:5173', 'http://localhost:5173','http://127.0.0.1:3000', 'http://localhost:3000'],
+        origin: [
+            'http://127.0.0.1:5173', 
+            'http://localhost:5173',
+
+            'http://127.0.0.1:3000', 
+            'http://localhost:3000',
+        ],
         credentials: true
     }
     app.use(cors(corsOptions))

@@ -6,7 +6,6 @@ export async function getCars(req, res) {
         const filterBy = {
             txt: req.query.txt || '',
         }
-        logger.debug('Getting Cars', filterBy)
         const cars = await carService.query(filterBy)
         res.json(cars)
     } catch (err) {
@@ -54,8 +53,8 @@ export async function updateCar(req, res) {
 export async function removeCar(req, res) {
     try {
         const carId = req.params.id
-        await carService.remove(carId)
-        res.send()
+        const deletedCount = await carService.remove(carId)
+        res.send(`${deletedCount} cars removed`)
     } catch (err) {
         logger.error('Failed to remove car', err)
         res.status(500).send({ err: 'Failed to remove car' })
@@ -69,6 +68,7 @@ export async function addCarMsg(req, res) {
         const msg = {
             txt: req.body.txt,
             by: loggedinUser,
+            createdAt: Date.now(),
         }
         const savedMsg = await carService.addCarMsg(carId, msg)
         res.json(savedMsg)
