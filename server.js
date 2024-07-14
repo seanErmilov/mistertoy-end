@@ -1,6 +1,6 @@
-import express  from 'express'
+import express from 'express'
 import cookieParser from 'cookie-parser'
-import cors  from 'cors'
+import cors from 'cors'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -27,10 +27,10 @@ if (process.env.NODE_ENV === 'production') {
     // your frontend dev-server is running on
     const corsOptions = {
         origin: [
-            'http://127.0.0.1:5173', 
+            'http://127.0.0.1:5173',
             'http://localhost:5173',
 
-            'http://127.0.0.1:3000', 
+            'http://127.0.0.1:3000',
             'http://localhost:3000',
         ],
         credentials: true
@@ -40,15 +40,15 @@ if (process.env.NODE_ENV === 'production') {
 
 import { authRoutes } from './api/auth/auth.routes.js'
 import { userRoutes } from './api/user/user.routes.js'
-import { carRoutes } from './api/car/car.routes.js'
+import { toyRoutes } from './api/toy/toy.routes.js'
 
 // routes
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
-app.use('/api/car', carRoutes)
+app.use('/api/toy', toyRoutes)
 
 // Make every unmatched server-side-route fall back to index.html
-// So when requesting http://localhost:3030/index.html/car/123 it will still respond with
+// So when requesting http://localhost:3030/index.html/toy/123 it will still respond with
 // our SPA (single page app) (the index.html file) and allow vue-router to take it from there
 
 app.get('/**', (req, res) => {
