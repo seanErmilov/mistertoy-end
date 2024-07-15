@@ -4,16 +4,17 @@ import { log } from 'console'
 
 export async function getToys(req, res) {
     try {
-        console.log('req.query :', req.query)
-        console.log('req.query filterBy :', req.query.filterBy)
-        const filterBy = {
-            txt: req.query.filterBy.name || '',
-            inStock: req.query.filterBy.inStock || 'all',
-            labels: req.query.filterBy.labels || [],
-            sortBy: req.query.sortBy.sort
-
+        const { filterBy = {}, sortBy = {} } = req.query;
+        const filter = {
+            toyName: filterBy.toyName || '',
+            inStock: filterBy.inStock || 'all',
+            labels: filterBy.labels || [],
         }
-        const toys = await toyService.query(filterBy)
+        const sort = {
+            sort: sortBy.sort || 'price'
+        }
+
+        const toys = await toyService.query(filter, sort)
         res.json(toys)
     } catch (err) {
         logger.error('Failed to get toys', err)
